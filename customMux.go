@@ -27,4 +27,8 @@ func main() {
 	// Any struct that has serveHTTP function can be a multiplexer
 	mux := &CustomServeMux{}
 	http.ListenAndServe(":8000", mux)
+	newMux := http.NewServeMux()
+	newMux.HandleFunc("/randomFloat", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintln(w, rand.Float64())
+	})
 }
